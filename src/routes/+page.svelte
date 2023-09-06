@@ -3,6 +3,7 @@
 	import {getFoodRequestApi, getFood} from "$lib/codeAssets/Food.ts";
 	import {onMount} from "svelte";
     import {writable} from "svelte/store";
+    import FoodCard from "$lib/FoodCard.svelte";
     let input : any;
     const foodOptions  = writable([])
     const FoodSearch = writable([])
@@ -39,7 +40,8 @@
     <!-- Fooddisplay -->
     <div>
         {#each Object.entries($foodOptions) as FoodObject}
-            <p>{FoodObject[1].food.foodId}</p>
+            <p>{FoodObject[1].food.label}</p>
+            <FoodCard name={FoodObject[1].food.label} pic={FoodObject[1].food.image}/>
         {/each}
     </div>
 
