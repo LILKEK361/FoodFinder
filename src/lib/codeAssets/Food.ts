@@ -10,6 +10,6 @@ export const getFoodRequestApi = (food : Array<string>) => {
 export async  function getFood(api : string){
     const request = await  fetch(api, )
     const result = await request.json()
-    console.log(result.hints)
-    return request
+
+    return result
 }
