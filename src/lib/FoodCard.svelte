@@ -3,7 +3,7 @@
     export let  name : string;
     export let pic : string;
 
-
+    document.getElementById("");
 
 </script>
 
