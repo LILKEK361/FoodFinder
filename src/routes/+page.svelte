@@ -4,11 +4,13 @@
 	import {onMount} from "svelte";
     import {writable} from "svelte/store";
     import FoodCard from "$lib/FoodCard.svelte";
+    import IngredientsContainer from "$lib/IngredientsContainer.svelte";
+
     let input : any;
     const foodOptions  = writable([])
     const FoodSearch = writable([])
 
-
+    //Api fetch for Food
     async function  searchFood () {
         const w =  getFood(getFoodRequestApi($FoodSearch))
 
@@ -16,6 +18,8 @@
         console.log(Object.entries($foodOptions))
 
     }
+
+    //Add to ingredient list
     function addToList(food : string){
         if(input !==  ""){
             FoodSearch.set([...$FoodSearch, food])
@@ -23,6 +27,12 @@
             console.log(FoodSearch)
             input = ""
         }
+    }
+
+    //Delete from Ingredient list
+    function deleteIngrident(ingredient:string) {
+        $FoodSearch.splice($FoodSearch.indexOf(ingredient), 1)
+        FoodSearch.set([...$FoodSearch])
     }
 
 </script>
@@ -35,7 +45,11 @@
         <button on:click={addToList(input)} placeholder="Enter">{"Add Food"}</button>
         <button on:click={searchFood} placeholder="Enter">{"Search Food"}</button>
         <button on:click={searchFood} placeholder="Enter">{"Search Food"}</button>
-        <p>Ingredientslist:  {$FoodSearch}</p>
+        <div class="flex">
+            {#each $FoodSearch as Ingredient}
+               <IngredientsContainer ingredient={Ingredient} deleted={deleteIngrident}/>
+            {/each}
+        </div>
     </div>
     <!-- Fooddisplay -->
     <div>
