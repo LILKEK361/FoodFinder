@@ -78,7 +78,13 @@
         {#each createChunks($foodOptions) as FoodChunk}
             <div class="flex justify-between">
                 {#each FoodChunk as Food }
-                <FoodCard name={Food.recipe.label} pic={Food.recipe.image} />
+                <FoodCard
+                        name={Food.recipe.label}
+                        pic={Food.recipe.image}
+                        cal={Math.round(Food.recipe.calories)}
+                        dishType={Food.recipe.dishType}
+                        Fullrecipe={Food.recipe.url}
+                />
                 {/each}
             </div>
         {/each}
