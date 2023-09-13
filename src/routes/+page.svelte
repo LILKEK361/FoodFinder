@@ -1,6 +1,6 @@
 <!-- YOU CAN DELETE EVERYTHING IN THIS PAGE -->
 <script lang="ts">
-	import {getFoodRequestApi, getFood} from "$lib/codeAssets/Food.ts";
+	import {getFoodRequestApi, getFood, getRecipe, getRecipeRequestApi } from "$lib/codeAssets/Food.ts";
 	import {onMount} from "svelte";
     import {writable} from "svelte/store";
     import FoodCard from "$lib/FoodCard.svelte";
@@ -12,10 +12,12 @@
 
     //Api fetch for Food
     async function  searchFood () {
-        const w =  getFood(getFoodRequestApi($FoodSearch))
-
-        foodOptions.set([...$foodOptions, ...(await w).hints])
-        console.log(Object.entries($foodOptions))
+        
+        const w =  getRecipe(getRecipeRequestApi($FoodSearch))
+        console.log(w)
+        foodOptions.set([...(await w).hits])
+      
+        
 
     }
 
@@ -35,13 +37,17 @@
         FoodSearch.set([...$FoodSearch])
     }
 
-    const createChunks = () : Array<any> =>{
-        let allChunks : Array<any>;
+    const createChunks = (FoodArray : Array<any>) : Array<any> =>{
         
-        for(var i = 0; i < $FoodSearch.length; i+=4){
-            let allChunks = $FoodSearch.slice(i, i+4)
+        FoodArray = FoodArray.map( (Element) => {return Element})
+        
+        
+        let allChunks : any[] = [];
+        
+        for(var i = 0; i < FoodArray.length; i+=4){
+            allChunks.push( FoodArray.slice(i, i+4))
         }
-
+        console.log(allChunks);
         return allChunks
     }
 
@@ -63,12 +69,15 @@
         </div>
     </div>
     <!-- Fooddisplay -->
-    <div>{#each createChunks as chunk }
-            {#each chunk  as FoodObject}
-                <p>{FoodObject[1].food.label}</p>
-                <FoodCard name={FoodObject[1].food.label} pic={FoodObject[1].food.image}/>
-            {/each}
+        {#each createChunks($foodOptions) as FoodChunk}
+            <div class="flex justify-between">
+                {#each FoodChunk as Food }
+                <FoodCard name={Food.recipe.label} pic={Food.recipe.image} />
+                {/each}
+            </div>
         {/each}
+    <div>
+
     </div>
 
 </div>
