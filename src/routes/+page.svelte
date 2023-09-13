@@ -24,10 +24,15 @@
     //Add to ingredient list
     function addToList(food : string){
         if(input !==  ""){
-            FoodSearch.set([...$FoodSearch, food])
+            if(!$FoodSearch.includes(food)){
+                FoodSearch.set([...$FoodSearch, food])
 
-            console.log(FoodSearch)
-            input = ""
+                console.log(FoodSearch)
+                input = ""
+            }else{
+                alert("Ingredient already in list")
+                input = ""
+            }
         }
     }
 
@@ -66,6 +71,7 @@
             {#each $FoodSearch as Ingredient}
                <IngredientsContainer ingredient={Ingredient} deleted={deleteIngrident}/>
             {/each}
+            <IngredientsContainer ingredient={"Delete"} deleted={() =>  {FoodSearch.set([])}} />
         </div>
     </div>
     <!-- Fooddisplay -->
