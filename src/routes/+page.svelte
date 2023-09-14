@@ -8,6 +8,16 @@
     let input: any;
     const foodOptions = writable([])
     const FoodSearch = writable([])
+    const Extras = writable([])
+
+    const ExtraOptions = {
+        diet : "&diet=",
+        cuisineType : "&cuisineType=",
+        mealType : "&mealType=",
+
+
+    }
+
 
     //Api fetch for Food
     async function searchFood() {
@@ -62,6 +72,25 @@
 <div class="h-[100vh] w-[100vw]">
     <!---Searchbar --->
     <div class="h-[10vh] w-full bg-blue-950 flex justify-center items-center ">
+
+        <!-- Extras -->
+        <details class="dropdown ">
+            <summary class="m-1 btn">Extra Options</summary>
+            <ul class="p-2 shadow menu dropdown-content z-[1] bg-base-100 rounded-box w-52">
+                <li>
+                    <details class="dropdown ">
+                        <summary class="m-1 btn">Extra Options</summary>
+                        <ul class="p-2 shadow menu dropdown-content z-[1] bg-base-100 rounded-box w-52">
+                            <li>diet</li>
+                            <li>3</li>
+                        </ul>
+                    </details>
+                </li>
+                <li>3</li>
+            </ul>
+        </details>
+
+        <!-- Search -->
         <div class="flex justify-center w-[50%]">
             <input bind:value={input} class="text-black mr-[1rem]"
                    on:keydown={(keydown) => {if(keydown.code === "Enter"){addToList(input)}}}
@@ -69,7 +98,9 @@
             <button class="mr-[1rem]" on:click={addToList(input)} placeholder="Enter">{"Add Food"}</button>
             <button class="mr-[1rem]" on:click={searchFood} placeholder="Enter">{"Search Food"}</button>
             <button on:click={searchFood} placeholder="Enter">{"Search Food"}</button>
+
         </div>
+        <!-- All Ingredients -->
         <div class="flex w-[50%]"> Ingredients:
             {#each $FoodSearch as Ingredient}
                 <IngredientsContainer
