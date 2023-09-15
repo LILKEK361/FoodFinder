@@ -9,14 +9,17 @@
     const foodOptions = writable([])
     const FoodSearch = writable([])
     const Extras = writable([])
-
-    const ExtraOptions = {
+    /*
+    {
         diet : "&diet=",
-        cuisineType : "&cuisineType=",
+            cuisineType : "&cuisineType=",
         mealType : "&mealType=",
 
 
-    }
+    }*/
+    const ExtraOptions : Array<object> = [
+        
+    ]
 
 
     //Api fetch for Food
