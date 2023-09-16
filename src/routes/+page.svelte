@@ -9,6 +9,7 @@
     const foodOptions = writable([])
     const FoodSearch = writable([])
     const Extras = writable([])
+    
     /*
     {
         diet : "&diet=",
