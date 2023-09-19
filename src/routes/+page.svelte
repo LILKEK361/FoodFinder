@@ -4,12 +4,17 @@
     import {writable} from "svelte/store";
     import FoodCard from "$lib/FoodCard.svelte";
     import IngredientsContainer from "$lib/IngredientsContainer.svelte";
+    import {DIETOPTIONS, AddDiet} from "$lib/index";
 
     let input: any;
     const foodOptions = writable([])
     const FoodSearch = writable([])
+<<<<<<< Updated upstream
     const Extras = writable([])
     
+=======
+
+>>>>>>> Stashed changes
     /*
     {
         diet : "&diet=",
@@ -18,15 +23,15 @@
 
 
     }*/
-    const ExtraOptions : Array<object> = [
-        
-    ]
+    const ExtraOptions = writable([])
+
+
 
 
     //Api fetch for Food
     async function searchFood() {
 
-        const w = getRecipe(getRecipeRequestApi($FoodSearch))
+        const w = getRecipe(getRecipeRequestApi($FoodSearch, $ExtraOptions))
         console.log(w)
         foodOptions.set([...(await w).hits])
 
@@ -39,7 +44,7 @@
             if (!$FoodSearch.includes(food)) {
                 FoodSearch.set([...$FoodSearch, food])
 
-                console.log(FoodSearch)
+
                 input = ""
             } else {
                 alert("Ingredient already in list")
@@ -83,10 +88,11 @@
             <ul class="p-2 shadow menu dropdown-content z-[1] bg-base-100 rounded-box w-52">
                 <li>
                     <details class="dropdown ">
-                        <summary class="m-1 btn">Extra Options</summary>
+                        <summary class="m-1 btn">Diet</summary>
                         <ul class="p-2 shadow menu dropdown-content z-[1] bg-base-100 rounded-box w-52">
-                            <li>diet</li>
-                            <li>3</li>
+                            {#each DIETOPTIONS as option}
+                                <li on:click={() => {$ExtraOptions = [...$ExtraOptions,AddDiet(option)]; console.log($ExtraOptions)}}>{option}</li>
+                            {/each}
                         </ul>
                     </details>
                 </li>

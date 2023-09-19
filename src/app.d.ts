@@ -8,7 +8,3 @@ declare namespace App {
 	// interface Platform {}
 }
 
-type ExtraOption = {
-    option : string
-    chosen : string
-}

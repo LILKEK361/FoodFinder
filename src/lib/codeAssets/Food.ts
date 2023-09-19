@@ -7,7 +7,8 @@ export const getFoodRequestApi = (food: Array<string>) => {
 }
 
 export const getRecipeRequestApi = (food: Array<string>, extras : Array<string>) => {
-    return `https://api.edamam.com/api/recipes/v2?type=public&q=${food}&app_id=0eeb2ed5&app_key=${key}&imageSize=REGULAR${extras}`
+
+    return extras ? `https://api.edamam.com/api/recipes/v2?type=public&q=${food}&app_id=0eeb2ed5&app_key=${key}&imageSize=REGULAR${}`.replace(",", "") : `https://api.edamam.com/api/recipes/v2?type=public&q=${food}&app_id=0eeb2ed5&app_key=${key}&imageSize=REGULAR`
 }
 
 export async function getFood(api: string) {
