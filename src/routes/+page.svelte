@@ -4,17 +4,15 @@
     import {writable} from "svelte/store";
     import FoodCard from "$lib/FoodCard.svelte";
     import IngredientsContainer from "$lib/IngredientsContainer.svelte";
-    import {DIETOPTIONS, AddDiet} from "$lib/index";
+    import {DIETOPTIONS, AddDiet} from "$lib/index.ts";
 
     let input: any;
     const foodOptions = writable([])
     const FoodSearch = writable([])
-<<<<<<< Updated upstream
-    const Extras = writable([])
-    
-=======
 
->>>>>>> Stashed changes
+    const Extras = writable([])
+    const ExtraOptions = writable([])
+    //Options: diet, nutritions and cal
     /*
     {
         diet : "&diet=",
@@ -23,7 +21,7 @@
 
 
     }*/
-    const ExtraOptions = writable([])
+
 
 
 
